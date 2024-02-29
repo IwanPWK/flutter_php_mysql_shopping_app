@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'signup_screen.dart';
+import 'login_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final isObscure = true.obs;
@@ -26,16 +27,16 @@ class _LoginScreenState extends State<LoginScreen> {
               constraints: BoxConstraints(minHeight: constraints.maxHeight),
               child: Column(
                 children: [
-                  //login screen header
+                  //signup screen header
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: 285,
                     child: Image.asset(
-                      "images/login.jpg",
+                      "images/register.jpg",
                     ),
                   ),
 
-                  //login screen sign-in form
+                  //signup screen sign-up form
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Container(
@@ -58,6 +59,46 @@ class _LoginScreenState extends State<LoginScreen> {
                               key: formKey,
                               child: Column(
                                 children: [
+                                  //name
+                                  TextFormField(
+                                    controller: nameController,
+                                    validator: (val) => val == "" ? "Please write name" : null,
+                                    decoration: InputDecoration(
+                                      prefixIcon: const Icon(Icons.person, color: Colors.black),
+                                      hintText: "name...",
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                        borderSide: const BorderSide(
+                                          color: Colors.white60,
+                                        ),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                        borderSide: const BorderSide(
+                                          color: Colors.white60,
+                                        ),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                        borderSide: const BorderSide(
+                                          color: Colors.white60,
+                                        ),
+                                      ),
+                                      disabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                        borderSide: const BorderSide(
+                                          color: Colors.white60,
+                                        ),
+                                      ),
+                                      contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 14,
+                                        vertical: 6,
+                                      ),
+                                      fillColor: Colors.white,
+                                      filled: true,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 18),
                                   //email
                                   TextFormField(
                                     controller: emailController,
@@ -162,7 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         vertical: 10,
                                         horizontal: 28,
                                       ),
-                                      child: Text("Login",
+                                      child: Text("SignUp",
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 16,
@@ -176,31 +217,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      const Text("Don't have an Account?", style: TextStyle(color: Colors.white, fontSize: 16)),
+                                      const Text("Already have an Account?", style: TextStyle(color: Colors.white, fontSize: 16)),
                                       TextButton(
                                         onPressed: () {
-                                          Get.to(() => const SignUpScreen());
+                                          Get.to(() => const LoginScreen());
                                         },
                                         child: const Text(
-                                          "Sign-up here",
-                                          style: TextStyle(fontSize: 16),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const Text('Or', style: TextStyle(color: Colors.white24)),
-                                  //"Are you an Admin - Admin
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Text(
-                                        "Are you an Admin?",
-                                        style: TextStyle(color: Colors.white, fontSize: 16),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {},
-                                        child: const Text(
-                                          "Click here",
+                                          "Login here",
                                           style: TextStyle(fontSize: 16),
                                         ),
                                       ),
